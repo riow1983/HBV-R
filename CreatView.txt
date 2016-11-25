@@ -1,0 +1,185 @@
+create view v_steroid_amount2 (
+       pt_id,
+       pt_name,
+       bunsho_date,
+       steroid_a_day,
+       yoho,
+       steroid_amount,
+       koshin_kacd,
+       koshin_kaname)
+as       
+select pt_id,
+       pt_name,
+       bunsho_date,
+       sum(case when drug_code = 'I00581' and unit = '錠'
+            then drug_amount*2.5
+            when drug_code = 'I00968' and unit = 'mL'
+            then drug_amount*1
+            when drug_code = 'I00968' and unit = 'mg'
+            then drug_amount*10
+            when drug_code = 'I00969' and unit = '錠'
+            then drug_amount*5
+            when drug_code = 'I01367' and unit = '錠'
+            then drug_amount*5
+            when drug_code = 'I01368' and unit = '錠'
+            then drug_amount*1
+            when drug_code = 'I01369' and unit = '錠'
+            then drug_amount*2.5
+            when drug_code = 'I01405' and unit = '錠'
+            then drug_amount*20
+            when drug_code = 'I01652' and unit = '錠'
+            then drug_amount*5
+            when drug_code = 'I01766' and unit = '錠'
+            then drug_amount*5
+            when drug_code = 'I01800' and unit = '錠'
+            then drug_amount*40
+            when drug_code = 'I01944' and unit = '錠'
+            then drug_amount*2.5
+            when drug_code = 'I00566' and unit = '瓶'
+            then drug_amount*50
+            when drug_code = 'I00566' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00567' and unit = 'mL'
+            then drug_amount*12.5
+            when drug_code = 'I00567' and unit = '瓶'
+            then drug_amount*62.5
+            when drug_code = 'I00807' and unit = '瓶'
+            then drug_amount*25
+            when drug_code = 'I00807' and unit = 'mg'
+            then drug_amount*0.25
+            when drug_code = 'I00808' and unit = '瓶'
+            then drug_amount*1250
+            when drug_code = 'I00808' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00809' and unit = '瓶'
+            then drug_amount*156.25
+            when drug_code = 'I00809' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00810' and unit = '瓶'
+            then drug_amount*50
+            when drug_code = 'I00810' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00811' and unit = '瓶'
+            then drug_amount*625
+            when drug_code = 'I00811' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00812' and unit = '瓶'
+            then drug_amount*125
+            when drug_code = 'I00812' and unit = 'mg'
+            then drug_amount*0.25
+            when drug_code = 'I00970' and unit = '管'
+            then drug_amount*16.5
+            when drug_code = 'I00970' and unit = 'mg'
+            then drug_amount*10
+            when drug_code = 'I00971' and unit = '瓶'
+            then drug_amount*66
+            when drug_code = 'I00971' and unit = 'mg'
+            then drug_amount*10
+            when drug_code = 'I01370' and unit = '管'
+            then drug_amount*20
+            when drug_code = 'I01370' and unit = 'mg'
+            then drug_amount*1
+            when drug_code = 'I01960' and unit = '管'
+            then drug_amount*40
+            when drug_code = 'I01960' and unit = 'mg'
+            then drug_amount*10
+            when drug_code = 'I00566' and unit = 'mL'
+            then drug_amount*50
+            when drug_code = 'I00970' and unit = 'mL'
+            then drug_amount*33
+            when drug_code = 'I00971' and unit = 'mL'
+            then drug_amount*33
+            else null
+       end) as steroid_a_day,
+       yoho,      
+       sum(case when drug_code = 'I00581' and unit = '錠'
+            then drug_use*2.5
+            when drug_code = 'I00968' and unit = 'mL'
+            then drug_use*1
+            when drug_code = 'I00968' and unit = 'mg'
+            then drug_use*10
+            when drug_code = 'I00969' and unit = '錠'
+            then drug_use*5
+            when drug_code = 'I01367' and unit = '錠'
+            then drug_use*5
+            when drug_code = 'I01368' and unit = '錠'
+            then drug_use*1
+            when drug_code = 'I01369' and unit = '錠'
+            then drug_use*2.5
+            when drug_code = 'I01405' and unit = '錠'
+            then drug_use*20
+            when drug_code = 'I01652' and unit = '錠'
+            then drug_use*5
+            when drug_code = 'I01766' and unit = '錠'
+            then drug_use*5
+            when drug_code = 'I01800' and unit = '錠'
+            then drug_use*40
+            when drug_code = 'I01944' and unit = '錠'
+            then drug_use*2.5
+            when drug_code = 'I00566' and unit = '瓶'
+            then drug_amount*50
+            when drug_code = 'I00566' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00567' and unit = 'mL'
+            then drug_amount*12.5
+            when drug_code = 'I00567' and unit = '瓶'
+            then drug_amount*62.5
+            when drug_code = 'I00807' and unit = '瓶'
+            then drug_amount*25
+            when drug_code = 'I00807' and unit = 'mg'
+            then drug_amount*0.25
+            when drug_code = 'I00808' and unit = '瓶'
+            then drug_amount*1250
+            when drug_code = 'I00808' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00809' and unit = '瓶'
+            then drug_amount*156.25
+            when drug_code = 'I00809' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00810' and unit = '瓶'
+            then drug_amount*50
+            when drug_code = 'I00810' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00811' and unit = '瓶'
+            then drug_amount*625
+            when drug_code = 'I00811' and unit = 'mg'
+            then drug_amount*1.25
+            when drug_code = 'I00812' and unit = '瓶'
+            then drug_amount*125
+            when drug_code = 'I00812' and unit = 'mg'
+            then drug_amount*0.25
+            when drug_code = 'I00970' and unit = '管'
+            then drug_amount*16.5
+            when drug_code = 'I00970' and unit = 'mg'
+            then drug_amount*10
+            when drug_code = 'I00971' and unit = '瓶'
+            then drug_amount*66
+            when drug_code = 'I00971' and unit = 'mg'
+            then drug_amount*10
+            when drug_code = 'I01370' and unit = '管'
+            then drug_amount*20
+            when drug_code = 'I01370' and unit = 'mg'
+            then drug_amount*1
+            when drug_code = 'I01960' and unit = '管'
+            then drug_amount*40
+            when drug_code = 'I01960' and unit = 'mg'
+            then drug_amount*10
+            when drug_code = 'I00566' and unit = 'mL'
+            then drug_amount*50
+            when drug_code = 'I00970' and unit = 'mL'
+            then drug_amount*33
+            when drug_code = 'I00971' and unit = 'mL'
+            then drug_amount*33
+            else null
+       end) as steroid_amount,
+       MAX(koshin_kacd) AS koshin_kacd,
+       MAX(koshin_kaname) AS koshin_kaname
+       
+from yaku_hbv
+WHERE bunsho_title != '抗がん剤注射'--抗がん剤注射除外
+group by pt_id,
+       pt_name,
+       bunsho_date,
+       yoho
+order by pt_id,bunsho_date       
+;
